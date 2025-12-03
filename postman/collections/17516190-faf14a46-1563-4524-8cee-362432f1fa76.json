@@ -1,0 +1,869 @@
+{
+	"info": {
+		"_postman_id": "17516190-faf14a46-1563-4524-8cee-362432f1fa76",
+		"name": "Tasks Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "157ef892-b787-4f22-bda0-5eb1b62c45b4",
+								"exec": [
+									"const responseData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is JSON\", () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Message is 'Account Created Successfully'\", () => {\r",
+									"    pm.expect(responseData.message).to.eql(\"Account Created Successfully\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Token is present and saved\", () => {\r",
+									"    pm.expect(responseData.data.token).to.be.a('string').and.to.not.be.empty;\r",
+									"    pm.environment.set(\"AUTH_TOKEN\", responseData.data.token);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Success flag is true\", () => {\r",
+									"    pm.expect(responseData.success).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "07396d9f-7f50-47ed-8b74-f47250b10978",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "17516190-89590d71-019a-4754-b11c-83852fba9df9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "test user",
+									"type": "text",
+									"uuid": "d599241f-f98b-47d7-9da2-8896b20a246a"
+								},
+								{
+									"key": "email",
+									"value": "test20gmail.com",
+									"type": "text",
+									"uuid": "0c23a6b0-12be-45ec-915d-3c28e5c0eace"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text",
+									"uuid": "0283fe2c-1f35-4a71-b338-17db15eafa77"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{Path_URL}}register",
+							"host": [
+								"{{Path_URL}}register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "47c10040-7519-4cef-93c4-c29b93fce592",
+								"exec": [
+									"const responseData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is JSON\", () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Message is 'You Are Login Successfully'\", () => {\r",
+									"    pm.expect(responseData.message).to.eql(\"You Are Login Successfully\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Token is present and saved\", () => {\r",
+									"    pm.expect(responseData.data.token).to.be.a('string').and.to.not.be.empty;\r",
+									"    pm.environment.set(\"AUTH_TOKEN\", responseData.data.token);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Success flag is true\", () => {\r",
+									"    pm.expect(responseData.success).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "17516190-7a9a82c3-90a6-4910-bd9e-2fdbb6820994",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "khaled@gmail.com",
+									"type": "text",
+									"uuid": "ce40f8fb-52cc-4b55-b4f3-84db9cee773f"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text",
+									"uuid": "a5a0a9e5-9a93-455d-a9fb-5813bbe96a4c"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{Path_URL}}login",
+							"host": [
+								"{{Path_URL}}login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "30736435-89ed-460d-aa12-43da645ca694",
+								"exec": [
+									"const responseData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is JSON\", () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Message is 'You are Logout Successfully'\", () => {\r",
+									"    pm.expect(responseData.message).to.eql(\"You are Logout Successfully\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "17516190-5434ce57-65f3-4d26-b7ab-3d713279f71b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/logout",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "17516190-7671ec3e-bd66-4e50-938b-9db5a7decb82"
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "All Tasks By User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ba3562bf-9dd5-49b8-acec-c2075f54cbee",
+								"exec": [
+									"const responseData = pm.response.json();\r",
+									"const tasks = responseData.data.tasks.data;\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Success flag is true\", () => {\r",
+									"    pm.expect(responseData.success).to.be.true;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Tasks object is paginated\", () => {\r",
+									"    pm.expect(responseData.data.tasks).to.have.property('current_page');\r",
+									"    pm.expect(responseData.data.tasks).to.have.property('data');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Tasks list is an array and not empty\", () => {\r",
+									"    pm.expect(tasks).to.be.an('array');\r",
+									"    pm.expect(tasks.length).to.be.at.least(1);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "17516190-caabe547-6be3-4d3c-8b25-0dfbe1bc78a6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Path_URL}}tasks",
+							"host": [
+								"{{Path_URL}}tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Store New Task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f8821077-9cdb-4e01-bb8d-04b4abf91d26",
+								"exec": [
+									"const responseData = pm.response.json();\r",
+									"const tasks = responseData.data.tasks;\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Success flag is true\", () => {\r",
+									"    pm.expect(responseData.success).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "17516190-f2f16767-2ac6-47e2-adff-5f4d2bdcd044",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "07 title task",
+									"type": "text",
+									"uuid": "18419363-5328-41fc-8c2f-fce160221e6e"
+								},
+								{
+									"key": "description",
+									"value": "07 description about task by user",
+									"type": "text",
+									"uuid": "3e660e4a-5be5-47f6-9b9e-eb9ae5776c32"
+								},
+								{
+									"key": "status",
+									"value": "pending",
+									"type": "text",
+									"uuid": "9edadb6a-fc5b-4506-a05c-70f788d8556b"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{Path_URL}}tasks/store",
+							"host": [
+								"{{Path_URL}}tasks"
+							],
+							"path": [
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Task Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e2e5c395-18b3-44f6-9e6b-2dc46276730c",
+								"exec": [
+									"const responseData = pm.response.json();\r",
+									"const tasks = responseData.data.tasks;\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Success flag is true\", () => {\r",
+									"    pm.expect(responseData.success).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "17516190-959547b4-cf78-4251-a114-e5c91c5d8f1a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "02 title task updated",
+									"type": "text",
+									"uuid": "16956ecc-c124-4634-a2ad-991f8898e579"
+								},
+								{
+									"key": "description",
+									"value": "02 description about task by user updated",
+									"type": "text",
+									"uuid": "0d8da1bc-24ab-4d30-be20-4e3a20f685ac"
+								},
+								{
+									"key": "status",
+									"value": "in_progress",
+									"type": "text",
+									"uuid": "dcfef11f-1ec9-4f77-ae4d-3912423bbda7"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{Path_URL}}tasks/update/?id=2",
+							"host": [
+								"{{Path_URL}}tasks"
+							],
+							"path": [
+								"update",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4701c661-bd8c-45b7-ac58-8715a76a7926",
+								"exec": [
+									"const responseData = pm.response.json();\r",
+									"const tasks = responseData.data.tasks;\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Success flag is true\", () => {\r",
+									"    pm.expect(responseData.success).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "17516190-f66848cf-af1a-4cea-add6-f9ffe93c0f4c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Path_URL}}tasks/delete/?id=9",
+							"host": [
+								"{{Path_URL}}tasks"
+							],
+							"path": [
+								"delete",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search For Tasks",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b8d938d6-0001-46fa-8dbc-cbc9cf7a9cef",
+								"exec": [
+									"const responseData = pm.response.json();\r",
+									"const tasks = responseData.data.tasks;\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Success flag is true\", () => {\r",
+									"    pm.expect(responseData.success).to.be.true;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tasks object is paginated\", () => {\r",
+									"    pm.expect(responseData.data.tasks).to.have.property('current_page');\r",
+									"    pm.expect(responseData.data.tasks).to.have.property('data');\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "17516190-9cf1bb2f-dd75-4847-9bf2-d82a8f25957f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Path_URL}}task/search/?title=01",
+							"host": [
+								"{{Path_URL}}task"
+							],
+							"path": [
+								"search",
+								""
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Task By Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "beea8dc6-bf8f-4dd9-afd0-12a8424ffc3c",
+								"exec": [
+									"const responseData = pm.response.json();\r",
+									"const tasks = responseData.data.tasks;\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Success flag is true\", () => {\r",
+									"    pm.expect(responseData.success).to.be.true;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tasks object is paginated\", () => {\r",
+									"    pm.expect(responseData.data.tasks).to.have.property('current_page');\r",
+									"    pm.expect(responseData.data.tasks).to.have.property('data');\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "17516190-771d366e-832c-438b-8031-0c4c28094e39",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Path_URL}}tasks/status/pending",
+							"host": [
+								"{{Path_URL}}tasks"
+							],
+							"path": [
+								"status",
+								"pending"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "17516190-7015d3da-3ab9-499f-bc6e-436fa34b3dcf"
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Store New Comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e3f4f11c-383b-4896-82d9-cd240a228417",
+								"exec": [
+									"const responseData = pm.response.json();\r",
+									"const tasks = responseData.data.tasks;\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Success flag is true\", () => {\r",
+									"    pm.expect(responseData.success).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "17516190-9fda64ec-7579-4393-8b03-acf719494406",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "commint",
+									"value": "test commint 02",
+									"type": "text",
+									"uuid": "f6f4acda-4ca2-4b93-b6f3-84dbb2a1e888"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{Path_URL}}tasks/2/comment/store",
+							"host": [
+								"{{Path_URL}}tasks"
+							],
+							"path": [
+								"2",
+								"comment",
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Comments By Task ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f0fb8fc3-720b-4779-933d-e9fa472d3327",
+								"exec": [
+									"const responseData = pm.response.json();\r",
+									"const tasks = responseData.data.tasks;\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Success flag is true\", () => {\r",
+									"    pm.expect(responseData.success).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "17516190-97f9d930-c7c4-4cc9-8985-371094e00d1d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "commint",
+									"value": "test commint",
+									"type": "text",
+									"uuid": "f6f4acda-4ca2-4b93-b6f3-84dbb2a1e888"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{Path_URL}}tasks/2/comments",
+							"host": [
+								"{{Path_URL}}tasks"
+							],
+							"path": [
+								"2",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "17516190-043d268d-5599-4c35-8603-6576d443e60a"
+		}
+	],
+	"variable": [
+		{
+			"key": "Path_URL",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "Token",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
